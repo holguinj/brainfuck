@@ -1,8 +1,8 @@
 module Brainfuck.Parse where
 
 import qualified Brainfuck.Types as T
-import qualified Data.Maybe as Maybe
-import qualified Data.Vector as Vec
+import qualified Data.Maybe      as Maybe
+import qualified Data.Vector     as Vec
 
 
 parseProgram :: String -> T.Program

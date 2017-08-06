@@ -1,6 +1,6 @@
 module Brainfuck.Memory where
 
-import Data.Map as M
+import           Data.Map as M
 
 type Byte = Int
 

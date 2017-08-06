@@ -15,18 +15,19 @@ data State = State
   }
 
 blank :: State
-blank = State Mem.blank 0 Map.empty (Vec.fromList [JumpAhead, JumpBack]) (Index 0)
+blank =
+  State Mem.blank 0 Map.empty (Vec.fromList [JumpAhead, JumpBack]) (Index 0)
 
 incPtr :: State -> State
-incPtr state = state { ptr = ptr state + 1 }
+incPtr state = state {ptr = ptr state + 1}
 
 decPtr :: State -> State
-decPtr state = state { ptr = ptr state - 1 }
+decPtr state = state {ptr = ptr state - 1}
 
 incPc :: State -> State
 incPc state =
   let (Index pc') = pc state
-  in state { pc = Index (pc' + 1) }
+  in state {pc = Index (pc' + 1)}
 
 initState :: Program -> State
 initState prog =
@@ -42,10 +43,10 @@ data Jump = Ahead | Back
 type NumberedJump = (Index, Jump)
 
 onlyJumps :: NumberedProgram -> [NumberedJump]
-onlyJumps []                   = []
-onlyJumps ((idx,JumpAhead):xs) = (idx, Ahead) : onlyJumps xs
-onlyJumps ((idx,JumpBack):xs)  = (idx, Back) : onlyJumps xs
-onlyJumps (_:xs)               = onlyJumps xs
+onlyJumps [] = []
+onlyJumps ((idx, JumpAhead):xs) = (idx, Ahead) : onlyJumps xs
+onlyJumps ((idx, JumpBack):xs) = (idx, Back) : onlyJumps xs
+onlyJumps (_:xs) = onlyJumps xs
 
 jumpMap' :: JumpMap -> [NumberedJump] -> [NumberedJump] -> JumpMap
 jumpMap' acc []                   []                    = acc
@@ -58,24 +59,27 @@ jumpMap' _   _                    _                     = error "pretty sure thi
 bidirectionalize :: Ord a => Map.Map a a -> Map.Map a a
 bidirectionalize m =
   let kvs = Map.toList m
-      vks = map (\(k,v) -> (v,k)) kvs
+      vks = map (\(k, v) -> (v, k)) kvs
   in Map.fromList (kvs ++ vks)
 
 makeJumpMap :: Program -> JumpMap
 makeJumpMap prog =
   let numbered = zip indexes (Vec.toList prog)
       jumps = onlyJumps numbered
-  in
-    bidirectionalize $ jumpMap' Map.empty [] jumps
+  in bidirectionalize $ jumpMap' Map.empty [] jumps
   where
     indexes :: [Index]
-    indexes = map Index ([0..] :: [Int])
+    indexes = map Index ([0 ..] :: [Int])
 
 getDest :: Index -> State -> Index
 getDest idx state =
   case Map.lookup idx (jumpMap state) of
     Just dest -> dest
-    Nothing -> error $ "unable to find a match for jump instruction at " ++ show idx ++ "!" -- shouldn't happen
+    Nothing ->
+      error $
+      "unable to find a match for jump instruction at " ++ show idx ++ "!" -- shouldn't happen
 
 example :: Program
-example = Vec.fromList [JumpAhead, JumpAhead, PrintChar, JumpBack, JumpBack, JumpAhead, JumpBack]
+example =
+  Vec.fromList
+    [JumpAhead, JumpAhead, PrintChar, JumpBack, JumpBack, JumpAhead, JumpBack]
