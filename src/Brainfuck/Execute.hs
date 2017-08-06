@@ -11,44 +11,38 @@ onMemory :: (Mem.Memory -> Mem.Memory) -> St.State -> St.State
 onMemory f state = state { St.memory = f (St.memory state) }
 
 runCmd :: T.Command -> St.State -> IO St.State
-runCmd T.IncPtr = return . St.incPtr
-runCmd T.DecPtr = return . St.decPtr
-runCmd T.IncVal =
-  \state -> do
-    let ptr = St.ptr state
-    return $ onMemory (Mem.incVal ptr) state
-runCmd T.DecVal =
-  \state -> do
-    let ptr = St.ptr state
-    return $ onMemory (Mem.decVal ptr) state
-runCmd T.PrintChar =
-  \state -> do
-    let ptr = St.ptr state
-    let val = Mem.deref ptr (St.memory state)
-    putChar (chr val)
-    return state
-runCmd T.ReadChar =
-  \state -> do
-    char <- getChar
-    let val = ord char
-    let ptr = St.ptr state
-    return $ onMemory (Mem.setVal ptr val) state
-runCmd T.JumpAhead =
-  \state -> do
-    let ptr = St.ptr state
-    let val = Mem.deref ptr (St.memory state)
-    let dest = St.getDest (St.pc state) state
-    if val == 0
-      then return $ state {St.pc = dest}
-      else return state
-runCmd T.JumpBack =
-  \state -> do
-    let ptr = St.ptr state
-    let val = Mem.deref ptr (St.memory state)
-    let dest = St.getDest (St.pc state) state
-    if val /= 0
-      then return $ state {St.pc = dest}
-      else return state
+runCmd T.IncPtr state = return (St.incPtr state)
+runCmd T.DecPtr state = return (St.decPtr state)
+runCmd T.IncVal state = do
+  let ptr = St.ptr state
+  return $ onMemory (Mem.incVal ptr) state
+runCmd T.DecVal state = do
+  let ptr = St.ptr state
+  return $ onMemory (Mem.decVal ptr) state
+runCmd T.PrintChar state = do
+  let ptr = St.ptr state
+  let val = Mem.deref ptr (St.memory state)
+  putChar (chr val)
+  return state
+runCmd T.ReadChar state = do
+  char <- getChar
+  let val = ord char
+  let ptr = St.ptr state
+  return $ onMemory (Mem.setVal ptr val) state
+runCmd T.JumpAhead state = do
+  let ptr = St.ptr state
+  let val = Mem.deref ptr (St.memory state)
+  let dest = St.getDest (St.pc state) state
+  if val == 0
+    then return $ state {St.pc = dest}
+    else return state
+runCmd T.JumpBack state = do
+  let ptr = St.ptr state
+  let val = Mem.deref ptr (St.memory state)
+  let dest = St.getDest (St.pc state) state
+  if val /= 0
+    then return $ state {St.pc = dest}
+    else return state
 
 runProgram' :: St.State -> IO St.State
 runProgram' state = do
