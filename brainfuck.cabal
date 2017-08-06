@@ -21,7 +21,11 @@ executable brainfuck
                        Brainfuck.Memory,
                        Brainfuck.Parse,
                        Brainfuck.State,
-                       Brainfuck.Types
+                       Brainfuck.Types,
+                       Brainfuck.Optimize,
+                       Brainfuck.Optimized.Execute,
+                       Brainfuck.Optimized.Memory,
+                       Brainfuck.Optimized.State
   build-depends:       base >= 4.7 && < 5
                      , parsec >= 3.1.11
                      , containers
