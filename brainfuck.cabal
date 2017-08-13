@@ -21,6 +21,7 @@ executable brainfuck
                        Brainfuck.Memory,
                        Brainfuck.Parse,
                        Brainfuck.State,
+                       Brainfuck.JumpMap,
                        Brainfuck.Types
   ghc-options:         -pgmL markdown-unlit
   build-depends:       base >= 4.7 && < 5

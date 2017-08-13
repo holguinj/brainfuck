@@ -1,6 +1,6 @@
 # Quick and Dirty Haskell pt 2
 
-> This is part two of a five-part tour of a no-frills [Brainfuck][bf] interpreter in Haskell.
+> This is part two of a six-part tour of a no-frills [Brainfuck][bf] interpreter in Haskell.
 > The source code for this project is available on [github][gh], and each post is
 > written in [literate Haskell][lhs], so you can execute these documents directly
 > with GHC.
@@ -19,29 +19,29 @@ The purpose of this module is simple and focused: take a `String` and turn it in
 In keeping with the quick-and-dirty philosophy, I'm not going to do any error handling here.
 
 ``` haskell
-import qualified Brainfuck.Types as T
+import Brainfuck.Types
 import qualified Data.Maybe      as Maybe
 import qualified Data.Vector     as Vec
 ```
 
 ``` haskell
-parseChar :: Char -> Maybe T.Command
+parseChar :: Char -> Maybe Command
 parseChar c =
   case c of
-    '>' -> Just T.IncPtr
-    '<' -> Just T.DecPtr
-    '+' -> Just T.IncVal
-    '-' -> Just T.DecVal
-    '.' -> Just T.PrintChar
-    ',' -> Just T.ReadChar
-    '[' -> Just T.JumpAhead
-    ']' -> Just T.JumpBack
+    '>' -> Just IncPtr
+    '<' -> Just DecPtr
+    '+' -> Just IncVal
+    '-' -> Just DecVal
+    '.' -> Just PrintChar
+    ',' -> Just ReadChar
+    '[' -> Just JumpAhead
+    ']' -> Just JumpBack
     _   -> Nothing
 ```
 
 There are 8 significant characters in Brainfuck, and anything else is considered a comment.
 
 ``` haskell
-parseProgram :: String -> T.Program
+parseProgram :: String -> Program
 parseProgram = Vec.fromList . Maybe.mapMaybe parseChar
 ```

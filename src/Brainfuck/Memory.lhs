@@ -16,11 +16,8 @@ module Brainfuck.Memory where
 ```
 
 ``` haskell
+import Brainfuck.Types
 import qualified Data.Map as Map
-```
-
-``` haskell
-type Byte = Int
 ```
 
 ``` haskell

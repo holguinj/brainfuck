@@ -14,11 +14,11 @@ module Brainfuck.State where
 ```
 
 ``` haskell
+import Brainfuck.Types 
 import qualified Data.Map         as Map
 import qualified Data.Vector      as Vec
-import           Brainfuck.Memory (Byte, Memory)
+import           Brainfuck.Memory (Memory)
 import qualified Brainfuck.Memory as Mem
-import           Brainfuck.Types  (Command (..), Index (..), Program)
 import qualified Brainfuck.JumpMap as JM
 ```
 
