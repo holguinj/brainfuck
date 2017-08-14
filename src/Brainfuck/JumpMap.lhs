@@ -12,7 +12,7 @@
 ``` haskell
 module Brainfuck.JumpMap where
 
-import           Brainfuck.Types (Command (..), Index (..), Program)
+import           Brainfuck.Types
 import qualified Data.Map        as Map
 import qualified Data.Vector     as Vec
 ```
@@ -42,12 +42,15 @@ onlyJumps (_:xs)                = onlyJumps xs
 
 ``` haskell
 jumpMap' :: JumpMap -> [NumberedJump] -> [NumberedJump] -> JumpMap
-jumpMap' acc []                   []                    = acc
+jumpMap' acc []                   []                  = acc
 jumpMap' acc stack                (j@(_,Ahead):jumps) = jumpMap' acc (j:stack) jumps
 jumpMap' acc ((aidx,Ahead):stack) ((bidx,Back):jumps) = jumpMap' (Map.insert aidx bidx acc) stack jumps
-jumpMap' _   []                   ((idx,Back):_)        = error $ "no matching '[' for ']' at " ++ show idx ++ "!"
-jumpMap' _   ((idx,_):_)          []                    = error $ "no matching ']' for '[' at " ++ show idx ++ "!"
-jumpMap' _   _                    _                     = error "pretty sure this is a bad situation, but I don't know how to put it into words."
+```
+
+```haskell
+jumpMap' _   []                   ((idx,Back):_)      = error $ "no matching '[' for ']' at " ++ show idx ++ "!"
+jumpMap' _   ((idx,_):_)          []                  = error $ "no matching ']' for '[' at " ++ show idx ++ "!"
+jumpMap' _   _                    _                   = error "pretty sure this is a bad situation, but I don't know how to put it into words."
 ```
 
 ``` haskell
