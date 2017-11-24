@@ -9,6 +9,18 @@
 [gh]: https://github.com/holguinj/brainfuck
 [brainfuck]: https://en.wikipedia.org/wiki/Brainfuck
 
+## Brainfuck.JumpMap
+
+Beyond parsing, there's a single pre-processing step that we'll need in order to
+execute a given program: we need to map out which jump instructions (`[` and
+`]`) match with which others.
+
+To take the smallest possible example: given the program `[JumpAhead,
+JumpBack]`, we want to know that the `JumpAhead` at index 0 matches the
+`JumpBack` at index 1, and vice-versa.
+
+We start with some standard imports:
+
 ``` haskell
 module Brainfuck.JumpMap where
 
@@ -17,17 +29,33 @@ import qualified Data.Map        as Map
 import qualified Data.Vector     as Vec
 ```
 
+A `JumpMap` is a `Data.Map.Map` (also known as a hash map) with `Index` keys and
+`Index` values:
+
 ``` haskell
 type JumpMap = Map.Map Index Index
+```
 
+Even though you and I know that a `JumpMap` is really just a `Map.Map Index
+Index`, I'd prefer to keep that fact hidden as an implementation detail. In
+other words, other modules in this program should be able to use `JumpMap`s for
+all their intended purposes without ever using `Data.Map`s functions directly.
+
+So given that fact and the fact that we want to expose an empty `JumpMap`,
+here's a quick alias:
+
+```haskell
 empty :: JumpMap
 empty = Map.empty
 ```
 
+
+```haskell
+data Jump = Ahead | Back
+```
+
 ``` haskell
 type NumberedProgram = [(Index, Command)]
-
-data Jump = Ahead | Back
 
 type NumberedJump = (Index, Jump)
 ```
