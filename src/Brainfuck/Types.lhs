@@ -1,17 +1,18 @@
 ---
-title: Quick and Dirty Haskell pt 1
+title: "Unfancy Haskell pt 1: Brainfuck Types"
+draft: true
 ---
 
-> This is part one of a five-part tour of a no-frills [Brainfuck][brainfuck] interpreter in Haskell.
+> This is part one of a five-part tour of a no-frills [Brainfuck][] interpreter in Haskell.
 > The source code for this project is available on [github][gh], and each post is
 > written in [literate Haskell][lhs], so you can execute these documents directly
 > with GHC.
 
-[lhs]: https://wiki.haskell.org/Literate_programming
+[lhs]: https://wiki.haskell.org/literate_programming
 [gh]: https://github.com/holguinj/brainfuck
 [brainfuck]: https://en.wikipedia.org/wiki/Brainfuck
 
-## Introduction to the Series
+## introduction to the series
 
 **Brainfuck is a terrible language**. It's designed to be difficult to read,
 difficult to reason about, and difficult to write. On the other hand, it's very
