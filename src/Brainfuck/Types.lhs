@@ -1,5 +1,7 @@
 ---
 title: "Unfancy Haskell pt 1: Brainfuck.Types"
+summary: Introduction to the series, which shows a complete and functional Brainfuck interpreter in idiomatic Haskell--without the use of super fancy types or techniques.
+tags: haskell, static-types, beginner
 draft: true
 ---
 

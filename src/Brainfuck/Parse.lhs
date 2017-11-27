@@ -1,9 +1,11 @@
 ---
 title: "Unfancy Haskell pt 2: Brainfuck.Parse"
 draft: true
+summary: Implementing a minimal Brainfuck parser.
+tags: haskell, static-types, beginner
 ---
 
-> This is part two of a six-part tour of a no-frills [Brainfuck][bf] interpreter in Haskell.
+> This is part two of a six-part tour of a no-frills [Brainfuck][] interpreter in Haskell.
 > The source code for this project is available on [github][gh], and each post is
 > written in [literate Haskell][lhs], so you can execute these documents directly
 > with GHC.
@@ -64,7 +66,7 @@ every character individually and only keeps the `Just` values, unwrapping them
 to get the underlying `Command` data. It returns a list, though, so we still
 have to call `Vec.fromList` on the result.
 
-But that's it! Pretty much... Well, actually there's one more thing. A Brainfuck
+But that's it! ...pretty much. Well, actually there's one more thing. A Brainfuck
 program isn't *really* just a flat list of tokens--every `JumpAhead` command has
 to have a corresponding `JumpBack` command (and vice-versa), and we'll need a
 quick way to tell which one matches up with which. In the next part of this
