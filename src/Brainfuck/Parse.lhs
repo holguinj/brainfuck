@@ -1,4 +1,7 @@
-# Quick and Dirty Haskell pt 2
+---
+title: "Unfancy Haskell pt 2: Brainfuck.Parse"
+draft: true
+---
 
 > This is part two of a six-part tour of a no-frills [Brainfuck][bf] interpreter in Haskell.
 > The source code for this project is available on [github][gh], and each post is

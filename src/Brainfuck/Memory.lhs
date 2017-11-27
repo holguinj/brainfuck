@@ -1,6 +1,9 @@
-# Quick and Dirty Haskell pt 3
+---
+title: "Unfancy Haskell pt 3: Brainfuck.Memory"
+draft: true
+---
 
-> This is part one of a six-part tour of a no-frills [Brainfuck][bf] interpreter in Haskell.
+> This is part three of a six-part tour of a no-frills [Brainfuck][bf] interpreter in Haskell.
 > The source code for this project is available on [github][gh], and each post is
 > written in [literate Haskell][lhs], so you can execute these documents directly
 > with GHC.

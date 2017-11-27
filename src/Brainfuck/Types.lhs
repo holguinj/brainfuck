@@ -1,5 +1,5 @@
 ---
-title: "Unfancy Haskell pt 1: Brainfuck Types"
+title: "Unfancy Haskell pt 1: Brainfuck.Types"
 draft: true
 ---
 
