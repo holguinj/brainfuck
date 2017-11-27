@@ -3,10 +3,10 @@ title: "Unfancy Haskell pt 1: Brainfuck.Types"
 draft: true
 ---
 
-> This is part one of a five-part tour of a no-frills [Brainfuck][] interpreter in Haskell.
-> The source code for this project is available on [github][gh], and each post is
-> written in [literate Haskell][lhs], so you can execute these documents directly
-> with GHC.
+> This is part one of a six-part tour of a no-frills [Brainfuck][] interpreter
+> in Haskell. The source code for this project is available on [github][gh], and
+> each post is written in [literate Haskell][lhs], so you can execute these
+> documents directly with GHC.
 
 [lhs]: https://wiki.haskell.org/literate_programming
 [gh]: https://github.com/holguinj/brainfuck
