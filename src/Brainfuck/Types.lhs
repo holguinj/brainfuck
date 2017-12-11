@@ -2,7 +2,6 @@
 title: "Unfancy Haskell pt 1: Brainfuck.Types"
 summary: Introduction to the series, which shows a complete and functional Brainfuck interpreter in idiomatic Haskell--without the use of super fancy types or techniques.
 tags: haskell, static-types, beginner
-draft: true
 ---
 
 > This is part one of a six-part tour of a no-frills [Brainfuck][] interpreter
@@ -154,7 +153,7 @@ Also, because `Index` is a brand-new type, we need to explicitly derive
 instances of `Eq` (the equality typeclass), `Ord` (ordered), and `Show` (for
 converting an index to a string).
 
-## What's next?
+## what's next?
 
 We have everything we need to represent a Brainfuck program in memory, but no
 way to read one! Next up is the Brainfuck.Parse module, which will convert a

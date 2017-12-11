@@ -1,6 +1,5 @@
 ---
 title: "Unfancy Haskell pt 2: Brainfuck.Parse"
-draft: true
 summary: Implementing a minimal Brainfuck parser.
 tags: haskell, static-types, beginner
 ---
@@ -12,7 +11,7 @@ tags: haskell, static-types, beginner
 
 [lhs]: https://wiki.haskell.org/Literate_programming
 [gh]: https://github.com/holguinj/brainfuck
-[brainfuck]: https://en.wikipedia.org/wiki/Brainfuck
+[Brainfuck]: https://en.wikipedia.org/wiki/Brainfuck
 
 ## Brainfuck.Parse
 
@@ -20,7 +19,7 @@ tags: haskell, static-types, beginner
 module Brainfuck.Parse where
 ```
 
-The purpose of this module is simple and focused: take a `String` and turn it
+The purpose of this module is very focused: take a `String` and turn it
 into a `Program`. Thankfully, parsing Brainfuck code is just barely more
 complicated than parsing binary, and requires no error handling.
 
