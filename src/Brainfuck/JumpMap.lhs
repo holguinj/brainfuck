@@ -2,7 +2,6 @@
 title: "Unfancy Haskell pt 3: Brainfuck.JumpMap"
 summary: Building a flow-control map from a parsed Brainfuck program.
 tags: haskell, static-types, beginner
-draft: true
 ---
 
 > This is part three of a six-part tour of a no-frills [Brainfuck][]
@@ -42,9 +41,10 @@ type JumpMap = Map.Map Index Index
 ```
 
 Even though you and I know that a `JumpMap` is really just a `Map.Map Index
-Index`, I'd prefer to keep that fact hidden as an implementation detail. In
-other words, other modules in this program should be able to use `JumpMap`s for
-all their intended purposes without ever using `Data.Map`s functions directly.
+Index`, I'd prefer to keep that fact hidden as a private implementation detail.
+In other words, other modules in this program should be able to use `JumpMap`s
+for all their intended purposes without ever using `Data.Map`s functions
+directly.
 
 So given that fact and the fact that we want to expose an empty `JumpMap`,
 here's a quick alias:
@@ -95,10 +95,17 @@ jumpMap' acc stack                (j@(_,Ahead):jumps) = jumpMap' acc (j:stack) j
 jumpMap' acc ((aidx,Ahead):stack) ((bidx,Back):jumps) = jumpMap' (Map.insert aidx bidx acc) stack jumps
 ```
 
-There are a few error cases to consider as well. Calling `error` like this is
-considered... not great. It totally circumvents the type system and generally
-makes it difficult to anticipate and recover from errors. That said, it's great
-for this use case because:
+### a note about errors
+
+The `jumpmap'` function also presents us with some of this program's few error
+cases. In the interest of keeping things simple and not getting too fancy, I've
+chosen to use the built-in `error` function, which has the misleading type
+`error :: String -> a`, and in reality just bombs out of the entire program with
+a given message.
+
+Calling `error` like this is considered... not great. It totally
+circumvents the type system and generally makes it difficult to anticipate and
+recover from errors. That said, it's great for this use case because:
 
   1. If we reach one of these errors then there's nothing we can do or want to
      do to recover. It's game over.
